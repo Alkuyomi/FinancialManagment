@@ -24,15 +24,19 @@
         <activity android:name=".Payment" />
         <activity android:name=".CreateProduct" />
         <activity android:name=".ProductList">
-
-        </activity>
-        <activity android:name=".InvoiceDetails" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ProductDetails"></activity>
+
+
+        <activity android:name=".InvoiceDetails" >
+
+        </activity>
+        <activity android:name=".ProductDetails">
+
+        </activity>
     </application>
 
 </manifest>

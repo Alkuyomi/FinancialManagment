@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,32 +20,40 @@ import java.util.List;
 
 public class InvoiceDetails extends AppCompatActivity {
 
-    TextView companyText , dataText , timeText , numberText , typeText , amountText , nameText , totalText ;
+    //TextView companyText , dataText , timeText , numberText , typeText , amountText , nameText , totalText ;
 
     JSONParser jsonParser          ;
     ProgressDialog progressDialog  ;
-    int       value                ;
+    int       value,id             ;
     String[]  companies  , times , numbers , types , names , totals ;
     int[]      data , amounts ;
+    ListView invDetailList ;
+
+    List<String> items ;
 
 
-    int id = 2 ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_invoice_details);
 
+        items = new  ArrayList<String>();
+
+        id = getIntent().getIntExtra("id"  , 0);
+
         jsonParser = new JSONParser();
 
-        companyText = (TextView) findViewById(R.id.compText  );
+        invDetailList = (ListView)findViewById(R.id.invDetailList);
+
+       /* companyText = (TextView) findViewById(R.id.compText  );
         dataText    = (TextView) findViewById(R.id.dataText  );
         timeText    = (TextView) findViewById(R.id.timeText  );
         numberText  = (TextView) findViewById(R.id.numberText);
         typeText    = (TextView) findViewById(R.id.typeText  );
         amountText  = (TextView) findViewById(R.id.amountText);
         nameText    = (TextView) findViewById(R.id.nameText  );
-        totalText   = (TextView) findViewById(R.id.totalText );
+        totalText   = (TextView) findViewById(R.id.totalText );*/
         
         new DisplayAllInvoices().execute() ;
 
@@ -124,22 +133,32 @@ public class InvoiceDetails extends AppCompatActivity {
             super.onPostExecute(s);
 
             if(value == 1){
-                Toast.makeText(getApplicationContext() , "Done ..." , Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext() , "Data retrieved " , Toast.LENGTH_SHORT).show();
 
-                companyText.setText("Company name : "+companies[0]);
+              /*  companyText.setText("Company name : "+companies[0]);
                 dataText.setText   ("Data         : "+data[0]);
                 timeText.setText   ("Time         : "+times[0]);
                 numberText.setText ("Number       : "+numbers[0]);
                 typeText.setText   ("Type         : "+types[0]);
                 amountText.setText ("Amount       : "+amounts[0]);
                 nameText.setText   ("Name         : "+names[0]);
-                totalText.setText  ("Total        :   "+totals[0]);
+                totalText.setText  ("Total        :   "+totals[0]);*/
+
+                items.add("Company name   "+companies[0]);
+                items.add("Data                       "+data[0]);
+                items.add("Time                       "+times[0]);
+                items.add("Type                       "+types[0]);
+                items.add("Amount                  "+amounts[0]);
+                items.add("Name                      "+names[0]);
+                items.add("Total                        "+totals[0]);
+
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(InvoiceDetails.this , android.R.layout.simple_list_item_1 , android.R.id.text1 , items);
+                invDetailList.setAdapter(adapter);
 
             }else{
                 Toast.makeText(getApplicationContext() , JSONParser.json , Toast.LENGTH_SHORT).show();
 
             }
-            Toast.makeText(getApplicationContext() , JSONParser.json , Toast.LENGTH_SHORT).show();
             progressDialog.dismiss();
         }
 

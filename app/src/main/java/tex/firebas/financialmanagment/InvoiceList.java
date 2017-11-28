@@ -102,7 +102,7 @@ public class InvoiceList extends AppCompatActivity {
             super.onPostExecute(s);
 
             if(value == 1){
-                Toast.makeText(getApplicationContext() , "Done ..." , Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext() , "Data retrieved" , Toast.LENGTH_SHORT).show();
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(InvoiceList.this , android.R.layout.simple_list_item_1 , android.R.id.text1 , invoices);
                 invList.setAdapter(adapter);
 

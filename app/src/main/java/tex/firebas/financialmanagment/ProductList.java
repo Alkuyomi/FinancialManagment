@@ -26,7 +26,8 @@ public class ProductList extends AppCompatActivity {
     ProgressDialog progressDialog ;
     int value ;
     String[]  products ;
-    ListView proList ;
+    ListView  proList ;
+    int[] ids ;
 
 
     @Override
@@ -44,7 +45,7 @@ public class ProductList extends AppCompatActivity {
         proList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                startActivity(new Intent(ProductList.this , Payment.class));
+                startActivity(new Intent(ProductList.this , ProductDetails.class).putExtra("id" , ids[0]));
             }
         });
 
@@ -80,11 +81,12 @@ public class ProductList extends AppCompatActivity {
                     value = jsonObject.getInt("value");
                     JSONArray jsonArray = jsonObject.getJSONArray("products");
                     products = new String[jsonArray.length()];
-
+                    ids      = new int[jsonArray.length()];
 
                     for(int i = 0 ; i < jsonArray.length() ; i++){
                         JSONObject object = jsonArray.getJSONObject(i);
                         products[i] = object.getString("title");
+                        ids[i] = object.getInt("id");
 
                     }
                 }else{
@@ -101,7 +103,7 @@ public class ProductList extends AppCompatActivity {
             super.onPostExecute(s);
 
             if(value == 1){
-                Toast.makeText(getApplicationContext() , "Done ..." , Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext() , "Data retrieved" , Toast.LENGTH_SHORT).show();
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(ProductList.this , android.R.layout.simple_list_item_1 , android.R.id.text1 , products);
                 proList.setAdapter(adapter);
 

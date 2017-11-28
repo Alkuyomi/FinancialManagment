@@ -39,7 +39,7 @@ public class ProductDetails extends AppCompatActivity {
 
         items = new ArrayList<String>();
 
-        id = 1;
+        id = getIntent().getIntExtra("id" ,  0 );
 
         jsonParser = new JSONParser();
 
@@ -71,7 +71,7 @@ public class ProductDetails extends AppCompatActivity {
 
 
 
-            JSONObject jsonObject = jsonParser.makeHttpRequest("http://192.168.1.105/FM/get_product_details.php" , "POST" , list);
+            JSONObject jsonObject = jsonParser.makeHttpRequest("http://"+GLOBAL.url+"/FM/get_product_details.php" , "POST" , list);
 
 
             try{

@@ -103,7 +103,7 @@ public class CreateInvoice extends AppCompatActivity {
             list.add(new BasicNameValuePair("name"    ,  name    )) ;
             list.add(new BasicNameValuePair("total"   ,  total   )) ;
 
-            jsonObject = jsonParser.makeHttpRequest("http://192.168.1.105/FM/add_invoice.php" , "POST" , list);
+            jsonObject = jsonParser.makeHttpRequest("http://"+GLOBAL.url+"/FM/add_invoice.php" , "POST" , list);
 
             try{
                 if(jsonObject != null && !jsonObject.isNull("value")){

@@ -101,7 +101,7 @@ public class ManageUsers extends AppCompatActivity {
             list.add(new BasicNameValuePair("id"     ,  id+"" )   ) ;
             list.add(new BasicNameValuePair("name"     ,  sName )   ) ;
             list.add(new BasicNameValuePair("email"    ,  sEmail)   ) ;
-            list.add(new BasicNameValuePair("mobile"   ,  sEmail)   ) ;
+            list.add(new BasicNameValuePair("mobile"   ,  sMobile)   ) ;
             list.add(new BasicNameValuePair("password" ,  sPassword)) ;
 
             jsonObject = jsonParser.makeHttpRequest("http://192.168.1.105/FM/edit_user.php" , "POST" , list);
@@ -156,7 +156,7 @@ public class ManageUsers extends AppCompatActivity {
             list.add(new BasicNameValuePair("id"     ,  id+"" )   ) ;
 
 
-            jsonObject = jsonParser.makeHttpRequest("http://192.168.1.105/FM/get_user_info.php" , "POST" , list);
+            jsonObject = jsonParser.makeHttpRequest("http://"+GLOBAL.url+"/FM/get_user_info.php" , "POST" , list);
 
             try{
                 if(jsonObject != null && !jsonObject.isNull("value")){
@@ -189,6 +189,7 @@ public class ManageUsers extends AppCompatActivity {
 
         @Override        protected void onPostExecute(String s) {
             super.onPostExecute(s);
+            Log.e("json " , JSONParser.json);
 
             if(value == 1){
 
@@ -197,7 +198,7 @@ public class ManageUsers extends AppCompatActivity {
                 userPassText.setText(passwords[0]);
                 mobileText.setText(mobiles[0]+"");
 
-                Toast.makeText(getApplicationContext() , "Data retrieved "+sName, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext() , "Data retrieved ", Toast.LENGTH_SHORT).show();
 
             }else{
                 Toast.makeText(getApplicationContext() ,JSONParser.json , Toast.LENGTH_LONG).show();

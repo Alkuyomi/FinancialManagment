@@ -25,5 +25,14 @@ public class Product extends AppCompatActivity {
             }
         });
 
+
+
+        listProductBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Product.this , ProductList.class));
+            }
+        });
+
     }
 }

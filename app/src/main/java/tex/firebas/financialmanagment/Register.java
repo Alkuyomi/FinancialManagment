@@ -1,10 +1,8 @@
 package tex.firebas.financialmanagment;
 
-import android.app.DownloadManager;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.net.http.RequestQueue;
+
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,10 +12,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -71,7 +65,7 @@ public class Register extends AppCompatActivity {
                         new AddUserTask().execute();
 
                 }else{
-                    Toast.makeText(Register.this , "Error 1" , Toast.LENGTH_LONG).show();
+                    Toast.makeText(Register.this , "Wrong Data" , Toast.LENGTH_LONG).show();
                 }
 
             }
@@ -96,10 +90,10 @@ public class Register extends AppCompatActivity {
             List<NameValuePair> list = new ArrayList<NameValuePair>();
             list.add(new BasicNameValuePair("name"     ,  sName )   ) ;
             list.add(new BasicNameValuePair("email"    ,  sEmail)   ) ;
-            list.add(new BasicNameValuePair("mobile"   ,  sEmail)   ) ;
+            list.add(new BasicNameValuePair("mobile"   ,  sMobile)   ) ;
             list.add(new BasicNameValuePair("password" ,  sPassword)) ;
 
-             jsonObject = jsonParser.makeHttpRequest("http://192.168.1.104/FM/add_user.php" , "POST" , list);
+             jsonObject = jsonParser.makeHttpRequest("http://"+GLOBAL.url+"/FM/add_user.php" , "POST" , list);
 
             try{
                 if(jsonObject != null && !jsonObject.isNull("value")){

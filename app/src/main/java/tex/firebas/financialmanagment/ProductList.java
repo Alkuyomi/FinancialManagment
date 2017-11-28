@@ -45,7 +45,7 @@ public class ProductList extends AppCompatActivity {
         proList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                startActivity(new Intent(ProductList.this , ProductDetails.class).putExtra("id" , ids[0]));
+                startActivity(new Intent(ProductList.this , ProductDetails.class).putExtra("id" , ids[i]));
             }
         });
 
@@ -72,7 +72,7 @@ public class ProductList extends AppCompatActivity {
 
 
 
-            JSONObject jsonObject = jsonParser.makeHttpRequest("http://192.168.1.105/FM/get_products.php" , "POST" , list);
+            JSONObject jsonObject = jsonParser.makeHttpRequest("http://"+GLOBAL.url+"/FM/get_products.php" , "POST" , list);
 
 
 
@@ -101,7 +101,7 @@ public class ProductList extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-
+             Log.e("json " , JSONParser.json);
             if(value == 1){
                 Toast.makeText(getApplicationContext() , "Data retrieved" , Toast.LENGTH_SHORT).show();
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(ProductList.this , android.R.layout.simple_list_item_1 , android.R.id.text1 , products);

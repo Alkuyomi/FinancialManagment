@@ -37,8 +37,8 @@ public class Options extends AppCompatActivity {
         });
 
 
-
-
+        if(LogIn.admin != 1)
+            manageBtn.setVisibility(View.INVISIBLE);
 
 
         manageBtn.setOnClickListener(new View.OnClickListener() {

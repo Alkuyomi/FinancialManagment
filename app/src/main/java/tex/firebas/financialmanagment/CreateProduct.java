@@ -48,10 +48,10 @@ public class CreateProduct extends AppCompatActivity {
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(priceET.getText().toString().length() > 1 &&
-                   typeET.getText().toString().length() > 1 &&
-                   stockET.getText().toString().length() > 1 &&
-                   titleET.getText().toString().length() > 1 ){
+                if(priceET.getText().toString().length() != 0 &&
+                   typeET.getText().toString().length() != 0 &&
+                   stockET.getText().toString().length() != 0 &&
+                   titleET.getText().toString().length() != 0 ){
 
                    price =  priceET.getText().toString() ;
                    type  = typeET.getText().toString() ;
@@ -92,7 +92,7 @@ public class CreateProduct extends AppCompatActivity {
             list.add(new BasicNameValuePair("stock"    ,  stock    )) ;
             list.add(new BasicNameValuePair("title"  ,  title      )) ;
 
-            jsonObject = jsonParser.makeHttpRequest("http://192.168.1.105/FM/add_product.php" , "POST" , list);
+            jsonObject = jsonParser.makeHttpRequest("http://"+GLOBAL.url+"/FM/add_product.php" , "POST" , list);
 
             try{
                 if(jsonObject != null && !jsonObject.isNull("value")){
@@ -113,6 +113,7 @@ public class CreateProduct extends AppCompatActivity {
 
                 startActivity(new Intent(CreateProduct.this , Options.class));
                 Toast.makeText(getApplicationContext() , "Product added successfully", Toast.LENGTH_SHORT).show();
+                Log.e("JSON ", JSONParser.json);
 
             }else{
                 Toast.makeText(getApplicationContext() ,JSONParser.json , Toast.LENGTH_LONG).show();

@@ -73,7 +73,7 @@ public class UsersList extends AppCompatActivity {
 
 
 
-            JSONObject jsonObject = jsonParser.makeHttpRequest("http://192.168.1.105/FM/get_users.php" , "POST" , list);
+            JSONObject jsonObject = jsonParser.makeHttpRequest("http://"+GLOBAL.url+"/FM/get_users.php" , "POST" , list);
 
 
 
@@ -102,7 +102,7 @@ public class UsersList extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-
+            Log.e("json " , JSONParser.json);
             if(value == 1){
                 Toast.makeText(getApplicationContext() , "Data retrieved" , Toast.LENGTH_SHORT).show();
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(UsersList.this , android.R.layout.simple_list_item_1 , android.R.id.text1 , users);

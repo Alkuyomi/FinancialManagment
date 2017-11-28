@@ -79,7 +79,7 @@ public class InvoiceDetails extends AppCompatActivity {
 
 
 
-            JSONObject jsonObject = jsonParser.makeHttpRequest("http://192.168.1.105/FM/get_invoice_details.php" , "POST" , list);
+            JSONObject jsonObject = jsonParser.makeHttpRequest("http://"+GLOBAL.url+"/FM/get_invoice_details.php" , "POST" , list);
 
 
             try{

@@ -79,7 +79,7 @@ public class LogIn extends AppCompatActivity {
             list.add(new BasicNameValuePair("password" , password));
 
 
-            JSONObject jsonObject = jsonParser.makeHttpRequest("http://192.168.1.105/FM/get_user.php" , "POST" , list);
+            JSONObject jsonObject = jsonParser.makeHttpRequest("http://"+GLOBAL.url+"/FM/get_user.php" , "POST" , list);
             try{
                 if(jsonObject != null && !jsonObject.isNull("value")){
                     value  = jsonObject.getInt("value");
@@ -101,14 +101,14 @@ public class LogIn extends AppCompatActivity {
             super.onPostExecute(s);
             progressDialog.dismiss();
             if(value == 1){
-                Toast.makeText(LogIn.this , "success ..."+admin , Toast.LENGTH_LONG).show();
+                Toast.makeText(LogIn.this , "welcome "+name , Toast.LENGTH_LONG).show();
 
 
                 startActivity(new Intent(LogIn.this , Options.class));
 
 
             }else{
-                Toast.makeText(LogIn.this , "Error : "+value, Toast.LENGTH_LONG).show();
+                Toast.makeText(LogIn.this , "The username and password don't match", Toast.LENGTH_LONG).show();
                 Log.e("json" , JSONParser.json);
             }
 

@@ -12,30 +12,26 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity" />
-        <activity android:name=".LogIn" />
+        <activity android:name=".LogIn">
+
+        </activity>
         <activity android:name=".Register" />
         <activity android:name=".Options" />
         <activity android:name=".Product" />
         <activity android:name=".Invoice" />
         <activity android:name=".CreateInvoice" />
-        <activity android:name=".InvoiceList" >
-
-        </activity>
+        <activity android:name=".InvoiceList" />
         <activity android:name=".Payment" />
         <activity android:name=".CreateProduct" />
-        <activity android:name=".ProductList">
+        <activity android:name=".ProductList"></activity>
+        <activity android:name=".InvoiceDetails" />
+        <activity android:name=".ProductDetails" />
+        <activity android:name=".ManageUsers"></activity>
+        <activity android:name=".UsersList">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-
-        <activity android:name=".InvoiceDetails" >
-
-        </activity>
-        <activity android:name=".ProductDetails">
-
         </activity>
     </application>
 

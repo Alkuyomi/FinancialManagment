@@ -29,6 +29,8 @@ public class LogIn extends AppCompatActivity {
     String name ,password ;
     int value ;
 
+    static int admin = 0 ;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,10 +79,11 @@ public class LogIn extends AppCompatActivity {
             list.add(new BasicNameValuePair("password" , password));
 
 
-            JSONObject jsonObject = jsonParser.makeHttpRequest("http://192.168.1.111/FM/add_user.php" , "POST" , list);
+            JSONObject jsonObject = jsonParser.makeHttpRequest("http://192.168.1.105/FM/get_user.php" , "POST" , list);
             try{
                 if(jsonObject != null && !jsonObject.isNull("value")){
                     value  = jsonObject.getInt("value");
+                    admin  =  jsonObject.getInt("admin");
                 }else{
                     value = 3 ;
 
@@ -98,7 +101,7 @@ public class LogIn extends AppCompatActivity {
             super.onPostExecute(s);
             progressDialog.dismiss();
             if(value == 1){
-                Toast.makeText(LogIn.this , "success ..." , Toast.LENGTH_LONG).show();
+                Toast.makeText(LogIn.this , "success ..."+admin , Toast.LENGTH_LONG).show();
 
 
                 startActivity(new Intent(LogIn.this , Options.class));
@@ -106,6 +109,7 @@ public class LogIn extends AppCompatActivity {
 
             }else{
                 Toast.makeText(LogIn.this , "Error : "+value, Toast.LENGTH_LONG).show();
+                Log.e("json" , JSONParser.json);
             }
 
 

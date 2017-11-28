@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="tex.firebas.financialmanagment.CreateInvoice"
+    android:orientation="vertical">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Company"
+        android:id="@+id/compET"
+        android:layout_weight="1"
+        android:layout_margin="5dp"
+        />
+
+    <EditText
+        android:layout_margin="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Data"
+        android:inputType="number"
+        android:id="@+id/dataET"
+        android:layout_weight="1"/>
+
+    <EditText
+        android:layout_margin="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Time"
+        android:id="@+id/timeET"
+        android:layout_weight="1"/>
+
+    <EditText
+        android:layout_margin="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Number"
+        android:id="@+id/numberET"
+        android:layout_weight="1"/>
+
+    <EditText
+        android:layout_margin="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Type"
+        android:id="@+id/typeET"
+        android:layout_weight="1"/>
+
+    <EditText
+        android:layout_margin="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Amount"
+        android:inputType="number"
+        android:id="@+id/amountET"
+        android:layout_weight="1"/>
+
+    <EditText
+        android:layout_margin="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Item Name"
+        android:id="@+id/nameET"
+        android:layout_weight="1"/>
+
+    <EditText
+        android:layout_margin="5dp"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Total"
+        android:inputType="number"
+        android:id="@+id/totalET"
+        android:layout_weight="1"/>
+
+    <LinearLayout
+        android:layout_margin="5dp"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_weight="1">
+
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="save"
+            android:id="@+id/saveBtn"
+            android:layout_weight="1"/>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="cancel"
+            android:id="@+id/cancelBtn"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Register extends AppCompatActivity {
-    Button registerUserBtn ;
+    Button registerUserBtn , deleteUserBtn ;
     EditText emailText , nameText  , mobileText , userPassText , confPassText ;
 
     JSONParser jsonParser ;
@@ -40,11 +40,14 @@ public class Register extends AppCompatActivity {
         jsonParser = new JSONParser();
 
         registerUserBtn = (Button)findViewById(R.id.registerUserbtn)   ;
+        deleteUserBtn = (Button)findViewById(R.id.deleteUserBtn)   ;
         emailText =       (EditText)findViewById(R.id.emailText    )   ;
         nameText =        (EditText)findViewById(R.id.nameText     )   ;
         mobileText =      (EditText)findViewById(R.id.mobileText   )   ;
         userPassText =    (EditText)findViewById(R.id.userPassText )   ;
         confPassText =    (EditText)findViewById(R.id.confPassText )   ;
+
+        deleteUserBtn.setVisibility(View.INVISIBLE);
 
 
         registerUserBtn.setOnClickListener(new View.OnClickListener() {

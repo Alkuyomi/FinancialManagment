@@ -51,12 +51,12 @@ public class UsersList extends AppCompatActivity {
         });
 
 
-        new UsersList.DisplayAllInvoices().execute();
+        new UsersList.DisplayAllUsers().execute();
     }
 
 
 
-    class DisplayAllInvoices extends AsyncTask<String,String,String> {
+    class DisplayAllUsers extends AsyncTask<String,String,String> {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();

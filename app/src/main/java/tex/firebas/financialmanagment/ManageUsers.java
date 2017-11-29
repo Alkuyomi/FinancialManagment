@@ -21,7 +21,7 @@ import java.util.List;
 
 public class ManageUsers extends AppCompatActivity {
 
-    Button registerUserBtn ;
+    Button registerUserBtn, deleteUserBtn ;
     EditText emailText , nameText  , mobileText , userPassText , confPassText ;
 
     JSONParser jsonParser ;
@@ -43,6 +43,7 @@ public class ManageUsers extends AppCompatActivity {
 
         jsonParser = new JSONParser();
 
+        deleteUserBtn = (Button)findViewById(R.id.deleteUserBtn)   ;
         registerUserBtn = (Button)findViewById(R.id.registerUserbtn)   ;
         emailText =       (EditText)findViewById(R.id.emailText    )   ;
         nameText  =        (EditText)findViewById(R.id.nameText     )   ;
@@ -55,6 +56,16 @@ public class ManageUsers extends AppCompatActivity {
         userPassText.setInputType(0);
 
         registerUserBtn.setText("Save");
+
+
+        deleteUserBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new DeleteUserTask().execute();
+               startActivity(new Intent(ManageUsers.this , UsersList.class));
+
+            }
+        });
 
         new GetUserInfo().execute();
         registerUserBtn.setOnClickListener(new View.OnClickListener() {
@@ -75,7 +86,7 @@ public class ManageUsers extends AppCompatActivity {
                     new ManageUsers.EditUserTask().execute();
 
                 }else{
-                    Toast.makeText(ManageUsers.this , "Error 1" , Toast.LENGTH_LONG).show();
+                    Toast.makeText(ManageUsers.this , "Wrong Data" , Toast.LENGTH_LONG).show();
                 }
 
             }
@@ -104,7 +115,7 @@ public class ManageUsers extends AppCompatActivity {
             list.add(new BasicNameValuePair("mobile"   ,  sMobile)   ) ;
             list.add(new BasicNameValuePair("password" ,  sPassword)) ;
 
-            jsonObject = jsonParser.makeHttpRequest("http://192.168.1.105/FM/edit_user.php" , "POST" , list);
+            jsonObject = jsonParser.makeHttpRequest("http://"+GLOBAL.url+"/FM/edit_user.php" , "POST" , list);
 
             try{
                 if(jsonObject != null && !jsonObject.isNull("value")){
@@ -125,6 +136,55 @@ public class ManageUsers extends AppCompatActivity {
 
                 startActivity(new Intent(ManageUsers.this , Options.class));
                 Toast.makeText(getApplicationContext() , "Data updated ", Toast.LENGTH_SHORT).show();
+
+            }else{
+                Toast.makeText(getApplicationContext() ,JSONParser.json , Toast.LENGTH_LONG).show();
+                nameText.setText(JSONParser.json);
+
+            }
+            progressDialog.dismiss();
+        }
+
+
+    }
+
+    class DeleteUserTask extends AsyncTask<String,String,String> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute()              ;
+            progressDialog = new ProgressDialog(ManageUsers.this);
+            progressDialog.setTitle("wait...");
+            progressDialog.show();
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            List<NameValuePair> list = new ArrayList<NameValuePair>();
+            list.add(new BasicNameValuePair("id"     ,  id+"" )   ) ;
+
+
+            jsonObject = jsonParser.makeHttpRequest("http://"+GLOBAL.url+"/FM/delete_user.php" , "POST" , list);
+
+            try{
+                if(jsonObject != null && !jsonObject.isNull("value")){
+                    value = jsonObject.getInt("value");
+                }else{
+                    value = 3 ;
+                }
+            }catch(Exception e){
+                Log.d("ERROR : " , e.getMessage());
+            }
+            return null;
+        }
+
+        @Override        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+
+            if(value == 1){
+
+                startActivity(new Intent(ManageUsers.this , Options.class));
+                Toast.makeText(getApplicationContext() , "user deleted", Toast.LENGTH_SHORT).show();
 
             }else{
                 Toast.makeText(getApplicationContext() ,JSONParser.json , Toast.LENGTH_LONG).show();

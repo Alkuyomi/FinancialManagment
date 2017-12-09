@@ -11,23 +11,35 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.codetroopers.betterpickers.calendardatepicker.CalendarDatePickerDialogFragment;
+import com.codetroopers.betterpickers.datepicker.DatePickerBuilder;
+import com.codetroopers.betterpickers.radialtimepicker.RadialTimePickerDialogFragment;
+import com.codetroopers.betterpickers.timepicker.TimePickerBuilder;
+import com.codetroopers.betterpickers.timepicker.TimePickerDialogFragment;
+
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
-public class CreateInvoice extends AppCompatActivity {
+
+
+public class CreateInvoice extends AppCompatActivity   implements CalendarDatePickerDialogFragment.OnDateSetListener , RadialTimePickerDialogFragment.OnTimeSetListener {
 
     JSONParser     jsonParser      ;
     ProgressDialog progressDialog  ;
     int            value           ;
     JSONObject jsonObject          ;
 
-    Button saveBtn ;
-    EditText companyET , dataET , timeET , numberET , typeET , amountET , nameET , totalET ;
-    String company , data , time , number , type , amount , name , total ;
+    Button saveBtn , numberBtn , dateBtn , timeBtn;
+    EditText companyET , dataET   , typeET , amountET , nameET , totalET ;
+    String company , data , time , number = "", type , amount , name , total ;
+
+    private static final String FRAG_TAG_DATE_PICKER = "fragment_date_picker_name";
+    private static final String FRAG_TAG_TIME_PICKER = "fragment_time_picker_name";
 
 
     @Override
@@ -39,24 +51,49 @@ public class CreateInvoice extends AppCompatActivity {
         jsonParser = new JSONParser();
 
         companyET = (EditText) findViewById(R.id.compET  );
-        dataET    = (EditText) findViewById(R.id.dataET  );
-        timeET    = (EditText) findViewById(R.id.timeET  );
-        numberET  = (EditText) findViewById(R.id.numberET);
         typeET    = (EditText) findViewById(R.id.typeET  );
         amountET  = (EditText) findViewById(R.id.amountET);
         nameET    = (EditText) findViewById(R.id.nameET  );
         totalET   = (EditText) findViewById(R.id.totalET );
 
         saveBtn   = (Button)findViewById(R.id.saveBtn    );
+        dateBtn   = (Button)findViewById(R.id.dateBtn    );
+        numberBtn  = (Button) findViewById(R.id.numberBtn);
+        timeBtn    = (Button) findViewById(R.id.timeBtn  );
 
+
+        timeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RadialTimePickerDialogFragment rtpd = new RadialTimePickerDialogFragment()
+                        .setOnTimeSetListener(CreateInvoice.this);
+                rtpd.show(getSupportFragmentManager(), FRAG_TAG_TIME_PICKER);
+            }
+        });
+
+
+        dateBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CalendarDatePickerDialogFragment cdp = new CalendarDatePickerDialogFragment()
+                        .setOnDateSetListener(CreateInvoice.this);
+                cdp.show(getSupportFragmentManager(), FRAG_TAG_DATE_PICKER);
+            }
+        });
+
+        numberBtn.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               startActivity(new Intent(CreateInvoice.this , SelectProduct.class));
+           }
+       });
 
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(companyET.getText().toString().length() > 1 &&
-                dataET.getText().toString().length()   > 1 &&
-                timeET.getText().toString().length()   > 1 &&
-                numberET.getText().toString().length() > 1 &&
+                        time.length()   > 1 &&
+                        data.length()   > 1 &&
                 typeET.getText().toString().length()   > 1 &&
                 amountET.getText().toString().length() > 1 &&
                 nameET.getText().toString().length()   > 1 &&
@@ -64,8 +101,7 @@ public class CreateInvoice extends AppCompatActivity {
 
                     company = companyET.getText().toString();
                     data    = dataET.getText().toString()   ;
-                    time    = timeET.getText().toString()   ;
-                    number  = numberET.getText().toString() ;
+                    time    = timeBtn.getText().toString()   ;
                     type    = typeET.getText().toString()   ;
                     amount  = amountET.getText().toString() ;
                     name    = nameET.getText().toString()   ;
@@ -80,6 +116,37 @@ public class CreateInvoice extends AppCompatActivity {
 
 
 
+
+
+    @Override
+    public void onDateSet(CalendarDatePickerDialogFragment dialog, int year, int monthOfYear, int dayOfMonth) {
+        int month = monthOfYear+1;
+        dateBtn.setText(year + "-" + month + "-" + dayOfMonth);
+        data = year + "-" + month + "-" + dayOfMonth ;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        CalendarDatePickerDialogFragment calendarDatePickerDialogFragment = (CalendarDatePickerDialogFragment) getSupportFragmentManager()
+                .findFragmentByTag(FRAG_TAG_DATE_PICKER);
+        if (calendarDatePickerDialogFragment != null) {
+            calendarDatePickerDialogFragment.setOnDateSetListener(this);
+        }
+
+
+        RadialTimePickerDialogFragment rtpd = (RadialTimePickerDialogFragment) getSupportFragmentManager().findFragmentByTag(FRAG_TAG_TIME_PICKER);
+        if (rtpd != null) {
+            rtpd.setOnTimeSetListener(this);
+        }
+    }
+
+
+    @Override
+    public void onTimeSet(RadialTimePickerDialogFragment dialog, int hourOfDay, int minute) {
+        timeBtn.setText(hourOfDay+":"+minute);
+        time = hourOfDay+":"+minute ;
+    }
 
     class AddInvoiceTask extends AsyncTask<String,String,String> {
         @Override
@@ -133,6 +200,13 @@ public class CreateInvoice extends AppCompatActivity {
             progressDialog.dismiss();
         }
 
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        totalET.setText(GLOBAL.TOTAL_PRICE+"");
 
     }
 }

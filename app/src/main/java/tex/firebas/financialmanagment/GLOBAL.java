@@ -6,5 +6,8 @@ package tex.firebas.financialmanagment;
 
 public class GLOBAL {
 
-    public static String url = "192.168.1.105";
+    public final static String url = "192.168.1.101";
+    public static double SELECTED_PRODUCT_PRICE = 0;
+    public static String SELECTED_PRODUCT_TITLE = null ;
+    public static double TOTAL_PRICE = 0;
 }

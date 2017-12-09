@@ -8,6 +8,31 @@
     tools:context="tex.firebas.financialmanagment.CreateInvoice"
     android:orientation="vertical">
 
+
+    <Button
+        android:layout_margin="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Invoice Number"
+        android:id="@+id/numberBtn"
+        android:layout_weight="1"/>
+
+    <Button
+        android:layout_margin="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Date"
+        android:id="@+id/dateBtn"
+        android:layout_weight="1"/>
+
+    <Button
+        android:layout_margin="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Time"
+        android:id="@+id/timeBtn"
+        android:layout_weight="1"/>
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -17,30 +42,9 @@
         android:layout_margin="5dp"
         />
 
-    <EditText
-        android:layout_margin="5dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Data"
-        android:inputType="number"
-        android:id="@+id/dataET"
-        android:layout_weight="1"/>
 
-    <EditText
-        android:layout_margin="5dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Time"
-        android:id="@+id/timeET"
-        android:layout_weight="1"/>
 
-    <EditText
-        android:layout_margin="5dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Number"
-        android:id="@+id/numberET"
-        android:layout_weight="1"/>
+
 
     <EditText
         android:layout_margin="5dp"

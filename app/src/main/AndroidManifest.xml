@@ -11,30 +11,32 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".LogIn">
-
-        </activity>
+        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".LogIn" />
         <activity android:name=".Register" />
         <activity android:name=".Options" />
         <activity android:name=".Product" />
         <activity android:name=".Invoice" />
-        <activity android:name=".CreateInvoice" />
+        <activity android:name=".CreateInvoice" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".InvoiceList" />
         <activity android:name=".Payment" />
         <activity android:name=".CreateProduct" />
-        <activity android:name=".ProductList"></activity>
+        <activity android:name=".ProductList" />
         <activity android:name=".InvoiceDetails" />
         <activity android:name=".ProductDetails" />
-        <activity android:name=".ManageUsers"></activity>
-        <activity android:name=".UsersList">
+        <activity android:name=".ManageUsers" />
+        <activity android:name=".UsersList" />
+        <activity android:name=".InvoiceNumber" />
+        <activity android:name=".SelectProduct">
 
         </activity>
+        <activity android:name=".SelectProductList"></activity>
     </application>
 
 </manifest>
